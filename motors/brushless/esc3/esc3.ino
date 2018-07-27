@@ -27,18 +27,8 @@ unsigned char ESC_SEQUENCE[] = {
   PIN_ESC_CDIR, PIN_ESC_BDIR, PIN_ESC_AEN
 };
 
-
+void sense0_isr();
 void esc_step(bool dir = true);
-
-bool led_state = false;
-bool skip_next_delay = false;
-void sense0_isr() {
-  //bitRead(PORTD, 13)
-  led_state = !led_state;
-  digitalWrite(NANO_BOARD_LED, (led_state) ? (HIGH) : (LOW));
-  skip_next_delay = true;
-  esc_step();
-}
 
 void setup_esc()
 {
@@ -53,10 +43,12 @@ void setup_esc()
   
   pinMode(PIN_ESC_SENSE0, INPUT);
   pinMode(PIN_ESC_SENSE1, INPUT);
-  //attachInterrupt(digitalPinToInterrupt(PIN_ESC_SENSE0), sense0_isr, FALLING);
+  attachInterrupt(digitalPinToInterrupt(PIN_ESC_SENSE0), sense0_isr, FALLING);
+
+  esc_step();
 }
 
-char esc_state = 0;
+volatile char esc_state = 0;
 
 void esc_step(bool dir = true) {
   if (dir) {
@@ -82,8 +74,34 @@ void esc_step(bool dir = true) {
   digitalWrite(PIN_ESC_AEN, pinZ!=PIN_ESC_AEN);
   digitalWrite(PIN_ESC_BEN, pinZ!=PIN_ESC_BEN);
   digitalWrite(PIN_ESC_CEN, pinZ!=PIN_ESC_CEN);
+}
+
+
+bool led_state = false;
+
+volatile long long last_zero_cross_us = 0;
+volatile long long last_dt_us = 0; // time (us) per ESC state
+
+volatile long long wait_dt_us = 0;
+volatile bool switch_pending = false;
+
+volatile int stepCounter = 0;
+
+void sense0_isr() {
+  unsigned long long now = micros();
+  long long dt_us = now - last_zero_cross_us;
+  if(dt_us < 50) return; // debounce(?)
   
-  
+  last_dt_us = dt_us;
+  //wait_dt_us = last_dt_us/2;
+  wait_dt_us = 1;
+  last_zero_cross_us = now;
+  switch_pending = true;
+
+// -----
+  esc_step();
+  stepCounter++;
+  if(0==(stepCounter%240)) {toggleLed();}
 }
 
 void setup() {
@@ -91,25 +109,23 @@ void setup() {
   setup_esc();
 }
 
-int lastSensorValue = 0;
+void toggleLed() {
+  led_state = !led_state;
+  digitalWrite(NANO_BOARD_LED, led_state?(HIGH):(LOW));
+}
+
 int loopCounter = 0;
-int stepTimeMs = 1000;
+
 
 void loop() {
-  //digitalWrite(NANO_BOARD_LED,(sensorValue<511)?(LOW):(HIGH));
-  loopCounter++;
-  if(0==loopCounter%12) {
-    int sensorValue = analogRead(A0);
-    lastSensorValue = sensorValue;
-    stepTimeMs = (sensorValue >> 3) + 1;
-  }
-  
-  if(!skip_next_delay) {
-    esc_step();
+  /*if(switch_pending) {
+    unsigned long long now = micros();
+    unsigned long long dt_us = (now - last_zero_cross_us);
+    if((dt_us < wait_dt_us) && !(dt_us > 250000)) return;
     
-    delay(stepTimeMs);
-  } else {
-    skip_next_delay = false;
-     delay(stepTimeMs/2);
-  }
+    esc_step();
+    stepCounter++;
+    if(0==(stepCounter%240)) {toggleLed();}
+    switch_pending = false;
+  }*/
 }
