@@ -24,7 +24,10 @@ volatile bool sense0_isr_flag = false;
 
 volatile int stepCounter = 0;
 
+volatile bool free_run = false;
+
 void sense0_isr() {
+  if(free_run) return;
   //toggleLed();
   //if(sense0_isr_pending) return;
   //sense0_isr_pending = true;
@@ -47,8 +50,11 @@ void sense0_isr() {
 }
 bool en_serial = true;
 
+#define ESC_FREE_RUN_PIN 12
+
 void setup() {
   pinMode(NANO_BOARD_LED, OUTPUT);
+  pinMode(ESC_FREE_RUN_PIN, INPUT);
   if(en_serial) Serial.begin(9600);
   setup_esc();
 }
@@ -65,9 +71,21 @@ void print_info() {
 
 void loop() {
 
+  char free_val = digitalRead(ESC_FREE_RUN_PIN);
+
+  if(free_val && !free_run) {
+    free_run = true;
+    esc_set_free_run();
+  } else if(!free_val && free_run) {
+    free_run = false;
+    esc_step();
+  }
+
   if(sense0_isr_flag) {
     sense0_isr_flag = false;
     if(0==(stepCounter%240)) {
+      
+      
       toggleLed();
       print_info();
     }

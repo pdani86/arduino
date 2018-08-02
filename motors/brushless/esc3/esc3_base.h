@@ -63,6 +63,12 @@ void setup_esc()
   esc_step();
 }
 
+void esc_set_free_run() {
+  digitalWrite(PIN_ESC_AEN, false);
+  digitalWrite(PIN_ESC_BEN, false);
+  digitalWrite(PIN_ESC_CEN, false);
+}
+
 volatile char esc_state = 0;
 
 void esc_step(bool dir = true) {
