@@ -94,36 +94,59 @@ void esc_step(bool dir = true) {
 #define ESC_PHASE_C_SENSE_PIN 12
 
 // ix: A-0, B-1, C-2
-// false: -/lower than virtual zero, true: +/...
+// false: -/lower than virtual neutral, true: +/...
 volatile bool PHASE_STATES[3] = {false, false, false};
 
 void onZeroCross(char wire,bool rising) {
-  //esc_state
-  //esc_set_state(...);
+
+  // next states:
+    // A fall -> 3
+    // B fall -> 5
+    // C fall -> 1
+    // A rise -> 0
+    // B rise -> 2
+    // C rise -> 4
+
+  char nextState = wire*2+((rising)?(0):(3));
+  if(nextState>5) nextState -= 6;
+  esc_state = nextState;
+  esc_set_state(esc_state);
 }
 
 unsigned long long LAST_CHANGE_US = 0;
 long LAST_DT_US = 0;
 
-void esc_check_phases() {
+bool esc_check_phases() {
   // ix: A-0, B-1, C-2
+  char curZwire = (esc_state>2)?(5-esc_state):(2-esc_state);
+  bool curZexpect = (0==(esc_state%2))?(true):(false);
+  
   bool cur[3];
   bool changed[3];
   cur[0] = digitalRead(ESC_PHASE_A_SENSE_PIN);
   cur[1] = digitalRead(ESC_PHASE_B_SENSE_PIN);
   cur[2] = digitalRead(ESC_PHASE_C_SENSE_PIN);
-  int nChanged = 0;
-  for(int i=0;i<3;i++) {
-    changed[i] = PHASE_STATES[i] != cur[i]; nChanged++;
-  }
-  if(nChanged==0) return;
-  if(nChanged>1) {esc_step(); delayMicroseconds(40); return;}
   unsigned long long now = micros();
   long dt_us = now - LAST_CHANGE_US;
+  //if(dt_us>100000) {esc_step(); LAST_CHANGE_US = now;} return false;
+ /* int nChanged = 0;
+  for(int i=0;i<3;i++) {
+    changed[i] = PHASE_STATES[i] != cur[i];
+    if(changed[i]) nChanged++;
+    PHASE_STATES[i] = cur[i];
+  }
+  if(nChanged==0 || !changed[curZwire]) {return false;}*/
+  //if(nChanged>1) {/*esc_step();*/ LAST_CHANGE_US = now; delayMicroseconds(40); return false;}
+if(cur[curZwire]!=curZexpect) {return false;}
   // ...
   LAST_DT_US = dt_us;
   LAST_CHANGE_US = now;
-  for(int i=0;i<3;i++) {if(changed[i]) {onZeroCross(i,cur[i]);}}
+  /*if(dt_us>250000) dt_us = 250000;
+  delayMicroseconds(dt_us/2);*/
+  
+  //for(int i=0;i<3;i++) {if(changed[i]) {onZeroCross(i,cur[i]);}}
+  onZeroCross(curZwire,cur[curZwire]);
+  return true;
 }
 
 
