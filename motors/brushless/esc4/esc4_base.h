@@ -119,7 +119,7 @@ long LAST_DT_US = 0;
 bool esc_check_phases() {
   // ix: A-0, B-1, C-2
   char curZwire = (esc_state>2)?(5-esc_state):(2-esc_state);
-  bool curZexpect = (0==(esc_state%2))?(true):(false);
+  bool curZexpect = (1==(esc_state%2))?(true):(false);
   
   bool cur[3];
   bool changed[3];
@@ -129,13 +129,13 @@ bool esc_check_phases() {
   unsigned long long now = micros();
   long dt_us = now - LAST_CHANGE_US;
   //if(dt_us>100000) {esc_step(); LAST_CHANGE_US = now;} return false;
- /* int nChanged = 0;
+  int nChanged = 0;
   for(int i=0;i<3;i++) {
     changed[i] = PHASE_STATES[i] != cur[i];
     if(changed[i]) nChanged++;
     PHASE_STATES[i] = cur[i];
   }
-  if(nChanged==0 || !changed[curZwire]) {return false;}*/
+  if(nChanged==0 || !changed[curZwire]) {return false;}
   //if(nChanged>1) {/*esc_step();*/ LAST_CHANGE_US = now; delayMicroseconds(40); return false;}
 if(cur[curZwire]!=curZexpect) {return false;}
   // ...
