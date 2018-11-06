@@ -45,42 +45,58 @@ int VoltageSensor::updateValue() {
 }
 
 class CurrentSensor {
-  int r_shunt; // mOhm (resistance to ground)
+  int r_shunt; // mOhm
 
   VoltageSensor* vs1;
   VoltageSensor* vs2;
 
   float current;
+  float _lastV1;
+  float _lastV2;
 
 public:
   
   inline CurrentSensor(VoltageSensor* _vs1,VoltageSensor* _vs2);
 
   inline float updateValue() {
-    if(vs1) vs1->updateValue();
-    delayMicroseconds(50);
-    if(vs2) vs2->updateValue();
-    float v1 = (vs1)?(vs1->getVoltage()):0.0f;
-    float v2 = (vs2)?(vs2->getVoltage()):0.0f;
+    long sumV1 = 0;
+    long sumV2 = 0;
+    int nSamples = 1;
+    for(int i=0;i<nSamples;i++) {
+      if(vs1) {
+        vs1->updateValue();
+        vs1->updateValue();
+        sumV1 += vs1->val();
+      }
+      if(vs2) {
+        vs2->updateValue();
+        vs2->updateValue();
+        sumV2 += vs2->val();
+      }
+    }
+    float constFactor = 5.0f/1023.0f/nSamples;
+    float v1 = sumV1*constFactor;
+    float v2 = sumV2*constFactor;
+    _lastV1 = v1;
+    _lastV2 = v2;
     float v_shunt = v1-v2;
-    float current = v_shunt/r_shunt*1000.0f;
+    current = v_shunt/r_shunt*1000.0f;
+    return current;
    }
   
   inline int rShunt() {return r_shunt;}
   inline void rShunt(int _r_shunt) {r_shunt = _r_shunt;}
-  inline float v1() {if(0==vs1) return 0.0f; return vs1->getVoltage();}
-  inline float v2() {if(0==vs2) return 0.0f; return vs2->getVoltage();}
+  inline float v1() {return _lastV1;}
+  inline float v2() {return _lastV2;}
   inline float vDiff() {return v1()-v2();}
 
   inline float getCurrent() {
-    float v_shunt = vDiff();
-    current = v_shunt/r_shunt*1000.0f;
     return current;
   }
 };
 
 CurrentSensor::CurrentSensor(VoltageSensor* _vs1,VoltageSensor* _vs2) {
-  r_shunt = 133; // mOhm
+  r_shunt = 100; // mOhm
   current = 0;
   vs1 = _vs1;
   vs2 = _vs2;

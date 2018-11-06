@@ -16,14 +16,12 @@ void printInfo() {
   float v1 = currentSensor.v1();
   float v2 = currentSensor.v2();
   float current = currentSensor.getCurrent();
-  //int shuntVal = currentSensor.val();
-  //Serial.print("Shunt Val: ");
-  //Serial.print(shuntVal);
-  Serial.println(" Shunt Voltage: ");
+  Serial.println("---------------");
+  Serial.println("Shunt Voltage (v1,v2,diff): ");
   Serial.println(v1);
   Serial.println(v2);
   Serial.println(v1-v2);
-  Serial.print(" Current: ");
+  Serial.print("Current: ");
   Serial.print(current);
   Serial.println(" A");
 }
