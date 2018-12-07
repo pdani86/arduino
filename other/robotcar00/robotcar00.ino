@@ -8,10 +8,14 @@ class MyMotor
   
 public:
   inline MyMotor(byte _enPin,byte _in1Pin,byte _in2Pin):enPin(_enPin),in1Pin(_in1Pin),in2Pin(_in2Pin) {_invertDir=false;}
-  inline init() {pinMode(enPin,OUTPUT); pinMode(in1Pin,OUTPUT); pinMode(in2Pin,OUTPUT);}
-  void pwm(byte val,bool dir = true);
-  void brake(byte val,bool dir = false);
+  inline void init() {pinMode(enPin,OUTPUT); pinMode(in1Pin,OUTPUT); pinMode(in2Pin,OUTPUT);}
+  
+  void pwm(byte val=255,bool dir = true);
+  void brake(byte val=255,bool dir = false);
   void enable(bool en);
+
+  inline void go(byte val=255,bool dir = true) {pwm(val,dir);}
+  inline void freeRun(bool free=true) {enable(!free);}
   inline void invertDir(bool inv) {_invertDir=inv;};
 };
 
@@ -42,27 +46,15 @@ void MyMotor::brake(byte val,bool dir) {
 #define PWM_LEFT_SIDE_1_PIN 7
 #define PWM_LEFT_SIDE_2_PIN 8
 
-
 MyMotor motorRight(EN_RIGHT_SIDE_PIN,PWM_RIGHT_SIDE_1_PIN,PWM_RIGHT_SIDE_2_PIN);
 MyMotor motorLeft(EN_LEFT_SIDE_PIN,PWM_LEFT_SIDE_1_PIN,PWM_LEFT_SIDE_2_PIN);
 
 void setup() {
-  // put your setup code here, to run once:
   pinMode(REAR_IR_PIN,INPUT);
   motorLeft.init();
   motorRight.init();
   motorRight.invertDir(true);
-  /*pinMode(EN_RIGHT_SIDE_PIN,OUTPUT);
-  pinMode(PWM_RIGHT_SIDE_1_PIN,OUTPUT);
-  pinMode(PWM_RIGHT_SIDE_2_PIN,OUTPUT);
-  pinMode(EN_LEFT_SIDE_PIN,OUTPUT);
-  pinMode(PWM_LEFT_SIDE_1_PIN,OUTPUT);
-  pinMode(PWM_LEFT_SIDE_2_PIN,OUTPUT);*/
 }
-
-
-
-
 
 void forward(byte val) {
   motorRight.pwm(val);
