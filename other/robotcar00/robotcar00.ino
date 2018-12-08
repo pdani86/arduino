@@ -137,7 +137,7 @@ enum IR_COMMAND {
   IRC_BRAKE_PWM_MAX,
 
   IRC_FORWARD = 0x00ff18e7,
-  IRC_BACKWARD = 0x00ff4a65,
+  IRC_BACKWARD = 0x00ff4ab5,
   IRC_TURN_RIGHT = 0x00ff5aa5,
   IRC_TURN_LEFT = 0x00ff10ef,
 
@@ -152,6 +152,7 @@ unsigned long last_ir_cmd_timems = 0;
 void handleIRcommand() {
   unsigned long val = ir_results.value;
   if(val==0xffffffff) val = last_ir_value;
+  else last_ir_value = val;
 
   last_ir_cmd_timems = millis();
   
