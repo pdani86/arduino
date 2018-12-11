@@ -16,6 +16,8 @@ namespace IR_REMOTE_CODES {
       VOLUME_PLUS = 0x00ffa857,
       EQ = 0x00ff906f,
       NUM_0 = 0x00ff6897,
+      PLUS_100 = 0x00ff9867,
+      PLUS_200 = 0x00ffb04f,
       NUM_1 = 0x00ff30cf,
       NUM_2 = 0x00ff18e7,
       NUM_3 = 0x00ff7a85,
@@ -30,20 +32,10 @@ namespace IR_REMOTE_CODES {
 
   /*
   namespace REMOTE_TYPE_SAMSUNG {
-    namespace IRCMD {
-      enum IR_COMMAND {
-        PWM_MAX,
-        PWM_INC = ,
-        PWM_DEC = ,
-        BRAKE_PWM_MAX,
-        FORWARD = ,
-        BACKWARD = ,
-        TURN_RIGHT = ,
-        TURN_LEFT = ,
-        BRAKE = ,
-        FREE_RUN = ,
-      };
-    }
+   enum REMOTE_BTN {
+     VOLUME_MINUS = ,
+     VOLUME_PLUS = ,
+   }
   }*/
 }
 
