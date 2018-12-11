@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>16</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>96</y>
+      <w>176</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Battery
+(10NiMH~13V)
+
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>224</y>
+      <w>176</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>5V 5A SMPS
+
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>784</x>
+      <y>224</y>
+      <w>176</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Arduino Nano
+
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>320</y>
+      <w>176</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Dual H-Bridge
+Motor Driver
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>224</y>
+      <w>176</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Logic 5V Hub
+
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>384</y>
+      <w>176</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>DC Motor
+(3-6V)
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>480</y>
+      <w>176</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>DC Motor
+(3-6V)
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>784</x>
+      <y>480</y>
+      <w>176</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>DC Motor
+(3-6V)
+bg=white
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>784</x>
+      <y>384</y>
+      <w>176</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>DC Motor
+(3-6V)
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>192</y>
+      <w>64</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;20.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>528</x>
+      <y>432</y>
+      <w>112</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;20.0;50.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>208</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>40.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>592</x>
+      <y>400</y>
+      <w>96</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>CH1
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>528</x>
+      <y>448</y>
+      <w>48</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>528</x>
+      <y>416</y>
+      <w>48</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>480</y>
+      <w>80</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>400</y>
+      <w>80</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;20.0;30.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>432</y>
+      <w>112</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>50.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>416</y>
+      <w>48</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>480</y>
+      <w>80</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>448</y>
+      <w>48</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>400</y>
+      <w>80</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>256</y>
+      <w>128</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Logic 5V</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>768</x>
+      <y>320</y>
+      <w>224</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>Right
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>304</x>
+      <y>320</y>
+      <w>224</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>Left
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>208</y>
+      <w>96</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>144</y>
+      <w>176</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Sensors (5V)
+
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>176</y>
+      <w>48</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>256</y>
+      <w>48</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>group=5
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>304</y>
+      <w>112</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>VMS
+group=5
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>50.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>160</y>
+      <w>128</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=-
+min. 10V
+lw=3
+fg=red</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>400</y>
+      <w>96</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>CH2
+fg=red
+lw=3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>256</x>
+      <y>32</y>
+      <w>768</w>
+      <h>608</h>
+    </coordinates>
+    <panel_attributes>Power Distribution
+--
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
