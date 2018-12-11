@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg3725"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="robotcar.svg">
+  <defs
+     id="defs3719" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="255.20428"
+     inkscape:cy="745.88375"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-midpoints="true"
+     showguides="false"
+     inkscape:snap-grids="false"
+     inkscape:snap-to-guides="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4919" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3722">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="1. réteg"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="translate(93.595967,-2.8941096)"
+       id="g4720"
+       inkscape:connector-avoid="true">
+      <g
+         transform="translate(1.3363476,-1.6036172)"
+         id="g4732">
+        <rect
+           id="rect3727"
+           width="43.446037"
+           height="20.710489"
+           x="-85.868652"
+           y="11.079885"
+           style="fill:none;stroke:#000000;stroke-width:0.15555444;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29166651px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.09921874"
+           x="-63.522861"
+           y="19.754633"
+           id="text4536"><tspan
+             sodipodi:role="line"
+             id="tspan4724"
+             x="-63.522861"
+             y="19.754633">Battery Pack</tspan><tspan
+             sodipodi:role="line"
+             id="tspan4726"
+             x="-63.522861"
+             y="26.369217">(min. 10V)</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g4715"
+       transform="translate(95.960096,-0.48868263)"
+       inkscape:connector-avoid="true">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.15252614;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         y="40.591053"
+         x="-85.765839"
+         height="13.229973"
+         width="43.716335"
+         id="rect3727-7" />
+      <text
+         id="text4536-4"
+         y="49.267277"
+         x="-81.058334"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29166651px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.09921874"
+         xml:space="preserve"><tspan
+           sodipodi:role="line"
+           id="tspan4564"
+           x="-81.058334"
+           y="49.267277"
+           style="stroke-width:0.09921874">5V 5A SMPS</tspan></text>
+    </g>
+    <g
+       transform="translate(100.42772,-4.8701569)"
+       id="g4760"
+       inkscape:connector-avoid="true">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.2056334;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         y="75.441933"
+         x="-31.324862"
+         height="21.275503"
+         width="49.410774"
+         id="rect3727-0" />
+      <text
+         id="text4536-5"
+         y="84.303894"
+         x="-6.4555578"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.87532282px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.11016231"
+         xml:space="preserve"><tspan
+           sodipodi:role="line"
+           id="tspan4576"
+           x="-6.4555583"
+           y="84.303894"
+           style="stroke-width:0.11016231">Dual H-Bridge</tspan><tspan
+           sodipodi:role="line"
+           id="tspan4578"
+           x="-6.4555578"
+           y="91.648048"
+           style="stroke-width:0.11016231">Motor Driver</tspan></text>
+    </g>
+    <g
+       id="g4705"
+       transform="translate(100.26184,-0.75595251)">
+      <g
+         id="g4754">
+        <rect
+           id="rect3727-5"
+           width="45.408558"
+           height="14.225533"
+           x="29.90213"
+           y="38.967186"
+           style="fill:none;stroke:#000000;stroke-width:0.16119298;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29166651px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.09921874"
+           x="34.070763"
+           y="48.440918"
+           id="text4536-0"><tspan
+             style="stroke-width:0.09921874"
+             y="48.440918"
+             x="34.070763"
+             id="tspan4590"
+             sodipodi:role="line">Arduino Nano</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g4710"
+       transform="translate(96.586242,-0.42843559)"
+       inkscape:connector-avoid="true">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.16119298;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         y="40.211636"
+         x="-29.129082"
+         height="14.225533"
+         width="45.408558"
+         id="rect3727-5-9" />
+      <text
+         id="text4536-0-2"
+         y="48.883556"
+         x="-24.425911"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29166651px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.09921874"
+         xml:space="preserve"><tspan
+           sodipodi:role="line"
+           id="tspan4615"
+           x="-24.425911"
+           y="48.883556">Logic 5V Hub</tspan></text>
+    </g>
+    <g
+       transform="translate(68.575716,-21.341082)"
+       id="g4652-7">
+      <rect
+         id="rect3727-5-96-7"
+         width="53.413097"
+         height="14.211985"
+         x="-60.392849"
+         y="118.52838"
+         style="fill:none;stroke:#000000;stroke-width:0.17474078;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29166651px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.09921874"
+         x="-55.696449"
+         y="127.19353"
+         id="text4536-0-9-0"><tspan
+           sodipodi:role="line"
+           id="tspan4808"
+           x="-55.696449"
+           y="127.19353">DC Motor (3-6 V)</tspan></text>
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g4652-7"
+       id="use4802"
+       transform="translate(117.27978,0.04835134)"
+       width="100%"
+       height="100%" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4802"
+       id="use4804"
+       transform="translate(0,18.445326)"
+       width="100%"
+       height="100%" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use4804"
+       id="use4806"
+       transform="translate(-116.22144)"
+       width="100%"
+       height="100%" />
+    <path
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 76.171815,62.337355 v 0"
+       id="path4838"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="61.739262"
+       y="78.908066"
+       id="text4864"><tspan
+         sodipodi:role="line"
+         id="tspan4862"
+         x="61.739262"
+         y="78.908066"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332">VMS</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888889px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="96.33519"
+       y="68.94603"
+       id="text4864-2"><tspan
+         sodipodi:role="line"
+         id="tspan4927">5V logic</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 30.786681,27.292647 v 6.200775 c 0,0.396875 0.396875,0.79375 0.79375,0.79375 h 6.972377 c 0.396875,0 0.79375,0.396875 0.79375,0.79375 v 5.021448"
+       id="path4931"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#g4720"
+       inkscape:connection-end="#g4715" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 32.052425,53.332343 v 27.083434 c 0,0.396875 0.396875,0.79375 0.79375,0.79375 h 36.256683"
+       id="path4937"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#g4715"
+       inkscape:connection-end="#g4760" />
+  </g>
+</svg>

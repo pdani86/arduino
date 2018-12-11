@@ -39,19 +39,20 @@ public:
   inline void setDigit(byte ix,byte val) { writeReg(1+ix,val); }
   inline void setIntensity(byte val) {writeReg(0x0a,val); }
   inline void fill(byte val) {for(int i=0;i<8;i++) {writeReg(1+i,val);}};
-  void setHexCode32(unsigned long code);
+  void setHexCode32(unsigned long code,byte dots=0);
 
 private:
   byte csPin;
 };
 
-void SpiDisplay8::setHexCode32(unsigned long code) {
+void SpiDisplay8::setHexCode32(unsigned long code,byte dots) {
   for(int i=0;i<4;i++) {
     byte curH = (code>>(i*8))&0xff;
     byte curL = curH&0x0f;
     curH = curH>>4;
-    setDigit(2*i,hexTo7seg[curL]);
-    setDigit(2*i+1,hexTo7seg[curH]);
+    setDigit(2*i,hexTo7seg[curL] | ((dots&0x1)?0x80:0));
+    setDigit(2*i+1,hexTo7seg[curH] | ((dots&0x2)?0x80:0));
+    dots = dots >> 2;
   }
 }
 
@@ -93,10 +94,14 @@ void setup() {
   mydisplay.init();
 }
 
+bool _dots = false;
+
 void loop() {
   unsigned long irValue = 0;
   if(irrecv.decode(&ir_results)) {
-    mydisplay.setHexCode32(ir_results.value);
+    byte dots = (_dots&&(ir_results.value==0xffffffff))?0xff:0x00;
+    mydisplay.setHexCode32(ir_results.value,dots);
+    _dots = !_dots; // so we can see repeat frequency
     Serial.println(ir_results.value,HEX);
     irrecv.resume();
   }

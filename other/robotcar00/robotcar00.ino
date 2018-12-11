@@ -118,7 +118,7 @@ unsigned long _lastSmoothTimeMs = 0;
 
 void updateMotorControl() {
   byte pwm = settings.pwm;
-  /*
+  if(settings.motion_state == BRAKE) _smoothPwm = 0.0;
   if(settings.smoothTorque) {
     unsigned long now = millis();
     unsigned long dtms = now - _lastSmoothTimeMs;
@@ -132,7 +132,7 @@ void updateMotorControl() {
     } else {
       pwm = _smoothPwm;
     }
-  }*/
+  }
   
   switch(settings.motion_state) {
     case FREE_RUN: car.freeRun(); break;
@@ -150,6 +150,14 @@ void setup() {
   irrecv.enableIRIn();
   //Serial.begin(9600);
   car.init();
+}
+
+void handle433MHzCommand() {
+  
+}
+
+void poll433MHzReceiver() {
+  
 }
 
 void loop() {
