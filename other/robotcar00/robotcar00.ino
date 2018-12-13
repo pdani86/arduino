@@ -1,5 +1,6 @@
 
 #include <IRremote.h>
+#include <Servo.h>
 #include "ir_cmds.h"
 #include "car.h"
 
@@ -43,19 +44,29 @@ struct SETTINGS
   byte brakePwm;
   bool obstacleIgnoring;
   bool smoothTorque;
+  byte servo_state;
 
   MOTION_STATE motion_state;
 
-  inline SETTINGS() {pwm = 255; brakePwm = 255; motion_state = BRAKE; obstacleIgnoring = false; smoothTorque = false;}
+  inline SETTINGS() {
+    pwm = 255;
+    brakePwm = 255;
+    motion_state = BRAKE;
+    obstacleIgnoring = false;
+    smoothTorque = false;
+    servo_state = 90;
+  }
 };
 
 SETTINGS settings;
+Servo myservo;
 
 
 unsigned long last_ir_value = 0;
 unsigned long last_ir_cmd_timems = 0;
 
 int pwmStep = 12;
+byte servoStep = 6;
 
 void handleIRcommand() {
   unsigned long val = ir_results.value;
@@ -99,6 +110,21 @@ void handleIRcommand() {
     break;
     case IRCMD::TOGGLE_LAMPS:
       digitalWrite(LAMP_PIN,!digitalRead(LAMP_PIN));
+    break;
+    case IRCMD::SERVO_CENTER:
+      settings.servo_state = 90;
+      myservo.write(settings.servo_state);
+    break;
+    case IRCMD::SERVO_PLUS:
+      
+      if(settings.servo_state<180-servoStep) settings.servo_state += servoStep;
+      else settings.servo_state = 180;
+      myservo.write(settings.servo_state);
+    break;
+    case IRCMD::SERVO_MINUS:
+      if(settings.servo_state>servoStep) settings.servo_state -= servoStep;
+      else settings.servo_state = 0;
+      myservo.write(settings.servo_state);
     break;
     default:
     break;
@@ -144,20 +170,23 @@ void updateMotorControl() {
   }
 }
 
-void setup() {
-  pinMode(REAR_IR_PIN,INPUT);
-  pinMode(LAMP_PIN,OUTPUT);
-  irrecv.enableIRIn();
-  //Serial.begin(9600);
-  car.init();
-}
-
 void handle433MHzCommand() {
   
 }
 
 void poll433MHzReceiver() {
   
+}
+
+
+void setup() {
+  pinMode(REAR_IR_PIN,INPUT);
+  pinMode(LAMP_PIN,OUTPUT);
+  irrecv.enableIRIn();
+  myservo.attach(10);
+  myservo.write(settings.servo_state);
+  //Serial.begin(9600);
+  car.init();
 }
 
 void loop() {

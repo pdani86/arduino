@@ -3,7 +3,7 @@
 	 |           +-----+           |
 	 | [*]D13/SCK      MISO/D12[*] |
 	 | [|]3.3V         MOSI/D11[*]~|
-	 | [ ]V.ref          SS/D10[ ]~|
+	 | [ ]V.ref          SS/D10[S]~|
 	 | [M]A0                 D9[L]~|
 	 | [M]A1                 D8[m] |
 	 | [I]A2                 D7[m] |
@@ -27,3 +27,4 @@ O: IR obstacle sensor
 m: H-Bridge channel left side pins
 M: H-Bridge channel right side pins
 L: lamps
+S: servo
