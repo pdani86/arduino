@@ -101,13 +101,14 @@ void handleRadioControlPacket(RADIO_CONTROL_PACKET* packet) {
     if(packet->gear>0) settings.motion_state = FORWARD;
     if(packet->gear<0) settings.motion_state = BACKWARD;
   }
-  if(abs(packet->steer) >= MIN_THROTTLE) settings.motion_state = (packet->steer>0)?(TURN_LEFT):(TURN_LEFT);
+  if(abs(packet->steer) >= MIN_THROTTLE/2) settings.motion_state = (packet->steer>0)?(TURN_LEFT):(TURN_LEFT);
 }
 
 bool poll_radio() {
   if(radio.available()) {
     radio.read(&last_rc_packet,sizeof(RADIO_CONTROL_PACKET));
     last_rc_cmd_timems = millis();
+    handleRadioControlPacket(&last_rc_packet);
     return true;
   }
   return false;

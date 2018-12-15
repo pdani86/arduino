@@ -4,9 +4,7 @@
 #include <Arduino.h>
 #include "radio_control.h"
 
-#define X_AXIS_PIN A0
-#define Y_AXIS_PIN A1
-#define BTN_PIN 4
+
 
 namespace RcCarController
 {
