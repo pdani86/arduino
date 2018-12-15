@@ -1,8 +1,34 @@
 
 #include <IRremote.h>
 #include <Servo.h>
+#include <SPI.h>
+#include <RF24.h>
+
 #include "ir_cmds.h"
 #include "car.h"
+#include "radio_control.h"
+
+#define RF24_CE_PIN A3
+#define RF24_CS_PIN A4
+#define RADIO_CHANNEL 29
+#define RC_ADDRESS 0x0086102400
+
+RF24 radio(RF24_CE_PIN,RF24_CS_PIN);
+
+RADIO_CONTROL_PACKET last_rc_packet;
+
+
+void setup_radio() {
+  radio.begin();
+  //radio.setPALevel(RF24_PA_LOW);
+  radio.setPALevel(RF24_PA_HIGH);
+  //radio.setDataRate(RF24_250KBPS);
+  //radio.setAutoAck(false);
+  //radio.setRetries(2,15);
+  radio.setChannel(RADIO_CHANNEL);
+  radio.openReadingPipe(1,RC_ADDRESS);
+  radio.startListening();
+}
 
 using namespace IR_CMD; // constants for IR commands (buttons)
 
@@ -10,13 +36,13 @@ using namespace IR_CMD; // constants for IR commands (buttons)
 #define REAR_IR_PIN 4
 
 #define EN_RIGHT_SIDE_PIN 5
-
 #define MOTOR_RIGHT_SIDE_1_PIN A0
 #define MOTOR_RIGHT_SIDE_2_PIN A1
-
 #define EN_LEFT_SIDE_PIN 6
 #define MOTOR_LEFT_SIDE_1_PIN 7
 #define MOTOR_LEFT_SIDE_2_PIN 8
+
+#define STEERING_SERVO_PIN 10
 
 #define LAMP_PIN 9
 
@@ -25,7 +51,8 @@ decode_results ir_results;
 
 Car car(
   EN_LEFT_SIDE_PIN, MOTOR_LEFT_SIDE_1_PIN, MOTOR_LEFT_SIDE_2_PIN,
-  EN_RIGHT_SIDE_PIN, MOTOR_RIGHT_SIDE_1_PIN, MOTOR_RIGHT_SIDE_2_PIN
+  EN_RIGHT_SIDE_PIN, MOTOR_RIGHT_SIDE_1_PIN, MOTOR_RIGHT_SIDE_2_PIN,
+  STEERING_SERVO_PIN
   );
 
 enum MOTION_STATE
@@ -59,11 +86,36 @@ struct SETTINGS
 };
 
 SETTINGS settings;
-Servo myservo;
+Servo& myservo = car.getSteeringServo();
+
+unsigned long last_rc_cmd_timems = 0;
+
+void handleRadioControlPacket(RADIO_CONTROL_PACKET* packet) {
+  byte servo_val = map(packet->steer,0,255,5,175);
+  settings.servo_state = servo_val;
+  myservo.write(servo_val);
+  settings.pwm = packet->throttle;
+  const byte MIN_THROTTLE = 80;
+
+  if(packet->throttle>=MIN_THROTTLE) {
+    if(packet->gear>0) settings.motion_state = FORWARD;
+    if(packet->gear<0) settings.motion_state = BACKWARD;
+  }
+  if(abs(packet->steer) >= MIN_THROTTLE) settings.motion_state = (packet->steer>0)?(TURN_LEFT):(TURN_LEFT);
+}
+
+bool poll_radio() {
+  if(radio.available()) {
+    radio.read(&last_rc_packet,sizeof(RADIO_CONTROL_PACKET));
+    last_rc_cmd_timems = millis();
+    return true;
+  }
+  return false;
+}
 
 
 unsigned long last_ir_value = 0;
-unsigned long last_ir_cmd_timems = 0;
+
 
 int pwmStep = 12;
 byte servoStep = 6;
@@ -73,7 +125,7 @@ void handleIRcommand() {
   if(val==0xffffffff) val = last_ir_value;
   else last_ir_value = val;
 
-  last_ir_cmd_timems = millis();
+  last_rc_cmd_timems = millis();
 
 //Serial.println(val,HEX);
   
@@ -170,14 +222,6 @@ void updateMotorControl() {
   }
 }
 
-void handle433MHzCommand() {
-  
-}
-
-void poll433MHzReceiver() {
-  
-}
-
 
 void setup() {
   pinMode(REAR_IR_PIN,INPUT);
@@ -186,12 +230,13 @@ void setup() {
   myservo.attach(10);
   myservo.write(settings.servo_state);
   //Serial.begin(9600);
+  setup_radio();
   car.init();
 }
 
 void loop() {
-  bool cmdReceived = pollIRremote();
-  unsigned long long dtms = millis() - last_ir_cmd_timems;
+  bool cmdReceived = pollIRremote() || poll_radio();
+  unsigned long long dtms = millis() - last_rc_cmd_timems;
   if(dtms>5000 || (dtms>500 && settings.motion_state!=FREE_RUN)) settings.motion_state = BRAKE;
   bool obstacleRear = !digitalRead(REAR_IR_PIN);
   if(!settings.obstacleIgnoring && obstacleRear && settings.motion_state!=FORWARD) {
