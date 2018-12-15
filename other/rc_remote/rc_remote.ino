@@ -69,12 +69,11 @@ void setup() {
   while(!Serial);
   Serial.println("Serial ready");
   radio.begin();
-  //radio.setPALevel(RF24_PA_LOW);
   radio.setPALevel(RF24_PA_HIGH);
   //radio.setDataRate(RF24_250KBPS);
   //radio.setAutoAck(false);
-  radio.setRetries(2,15);
-  radio.setChannel(29);
+  //radio.setRetries(2,15);
+  radio.setChannel(RADIO_CHANNEL);
 
   radio.openWritingPipe(RC_ADDRESS);
   radio.stopListening();
@@ -86,11 +85,13 @@ RADIO_CONTROL_PACKET control_packet;
 
 void loop() {
   joy.update();
+  memset(&control_packet,0,sizeof(control_packet));
   joy.fillControlPacket(&control_packet);
   radio.write(&control_packet,sizeof(control_packet));
   Serial.println(control_packet.throttle);
-  Serial.println((byte)control_packet.steer);
+  Serial.println((int)control_packet.steer);
   Serial.println(control_packet.lamps);
+  Serial.println((int)control_packet.gear);
   Serial.println();
   delay(100);
 } 
