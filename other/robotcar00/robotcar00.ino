@@ -100,8 +100,14 @@ void handleRadioControlPacket(RADIO_CONTROL_PACKET* packet) {
   if(packet->throttle>=MIN_THROTTLE) {
     if(packet->gear>0) settings.motion_state = FORWARD;
     if(packet->gear<0) settings.motion_state = BACKWARD;
+  } else {
+    settings.motion_state = BRAKE;
+    settings.pwm = 0;
   }
-  if(abs(packet->steer) >= MIN_THROTTLE/2) settings.motion_state = (packet->steer>0)?(TURN_LEFT):(TURN_LEFT);
+  if(abs(packet->steer) >= MIN_THROTTLE/2) {
+    settings.motion_state = (packet->steer>0)?(TURN_LEFT):(TURN_RIGHT);
+    settings.pwm = (packet->steer-1)*2;
+  }
 }
 
 bool poll_radio() {
