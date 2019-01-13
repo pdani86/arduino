@@ -1,8 +1,8 @@
 #include <SPI.h>
 #include <RF24.h>
 
-#define RF24_CE_PIN A3
-#define RF24_CS_PIN A4
+#define RF24_CE_PIN 7
+#define RF24_CS_PIN 8
 #define RADIO_CHANNEL 29
 #define RC_ADDRESS 0x0086102400
 
@@ -14,17 +14,19 @@ void setup_radio() {
   //radio.setDataRate(RF24_250KBPS);
   //radio.setAutoAck(false);
   radio.setChannel(RADIO_CHANNEL);
-  radio.openReadingPipe(1,RC_ADDRESS);
-  radio.startListening();
+  //radio.openReadingPipe(1,RC_ADDRESS);
+  //radio.startListening();
+  radio.openWritingPipe(RC_ADDRESS);
+  radio.stopListening();
 }
 
 void setup() {
-  Serial.begin(9600);
+  //Serial.begin(9600);
+  Serial.begin(115200);
   while(!Serial);
   setup_radio();
-
+  Serial.println("INIT");
 }
-
 
 struct RADIO_CONTROL_PACKET
 {
@@ -57,6 +59,8 @@ class SerialHandler
 {
   public:
   RADIO_CONTROL_PACKET controlPacket;
+  bool newDataFlag;
+  
   E_SERIAL_PARSE_STATE serialParseState;
 
   inline SerialHandler() {reset();}
@@ -73,6 +77,7 @@ private:
   int packet_pos;
   byte controller_state_packet_buf[64];
   
+  
 };
 
 void SerialHandler::handleSerial() {
@@ -80,6 +85,7 @@ void SerialHandler::handleSerial() {
    {
      //byte ch = Serial.peek();
      byte ch = Serial.read();
+     //Serial.print("Serial char: "); Serial.println((byte)ch,HEX);
      switch(serialParseState) {
       case IDLING:
         if(ch=='s') {
@@ -95,12 +101,19 @@ void SerialHandler::handleSerial() {
         }
       break;*/
       case RECEIVING_CONTROLLER_STATE:
-        if((ch&0x0f==0) && packet_pos<64 ) {
+        if(((ch&0x0f)==0) && packet_pos<64 ) {
           controller_state_packet_buf[packet_pos] = ch;
           packet_pos++;
+          //Serial.print("packet_pos - ");
+          //Serial.println(packet_pos);
         } else {
           //decode
           myDecode((byte*)controller_state_packet_buf,packet_pos,(byte*)&controlPacket);
+          serialParseState = IDLING;
+          packet_pos = 0;
+          newDataFlag = true;
+          //Serial.print("steer - ");
+          //Serial.println((int)controlPacket.steer);
         }
       break;
       case UNKNOWN_STATE:
@@ -124,5 +137,7 @@ void loop() {
   unsigned long now = millis();
   if(now-last_packet_sent_time_ms >= packet_send_interval_ms) {
     sendControllerStatePacket();
+    last_packet_sent_time_ms = now;
+    serialHandler.newDataFlag = false;
   }
 }

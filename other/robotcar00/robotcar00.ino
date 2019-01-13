@@ -91,7 +91,10 @@ Servo& myservo = car.getSteeringServo();
 unsigned long last_rc_cmd_timems = 0;
 
 void handleRadioControlPacket(RADIO_CONTROL_PACKET* packet) {
-  byte servo_val = map(packet->steer,0,255,5,175);
+  //byte servo_val = map(packet->steer,0,255,5,175);
+  //byte servo_val = map(packet->steer,-128,127,5,175);
+  byte servo_val = map(packet->steer,-128,127,45,135);
+  servo_val = 180-servo_val;
   settings.servo_state = servo_val;
   myservo.write(servo_val);
   settings.pwm = packet->throttle;
@@ -104,7 +107,9 @@ void handleRadioControlPacket(RADIO_CONTROL_PACKET* packet) {
     settings.motion_state = BRAKE;
     settings.pwm = 0;
   }
-  if(abs(packet->steer) >= MIN_THROTTLE/2) {
+  if(abs(packet->steer) >= MIN_THROTTLE/2
+    && digitalRead(LAMP_PIN) // HACK!!!
+    ) {
     settings.motion_state = (packet->steer>0)?(TURN_LEFT):(TURN_RIGHT);
     settings.pwm = (packet->steer-1)*2;
   }
