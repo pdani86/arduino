@@ -11,6 +11,7 @@ class Car
   MyMotor motorLeft;
   MyMotor motorRight;
   Servo steeringServo;
+  bool differentialDrive; // different PWM, when servo is not centered
 public:
   inline Car(
     byte leftEnPin,byte leftIn1Pin,byte leftIn2Pin,
@@ -19,7 +20,9 @@ public:
     )
     :motorLeft(leftEnPin,leftIn1Pin,leftIn2Pin),
     motorRight(rightEnPin,rightIn1Pin,rightIn2Pin),
-    _steeringServoPin(steeringServoPin) {}
+    _steeringServoPin(steeringServoPin) {
+        differentialDrive = true;
+      }
     
   inline void init() {
     motorLeft.init();
